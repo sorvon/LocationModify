@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Location Modify</string>
+    <string name="saveButton">保存位置</string>
+    <string name="aliasButton">备注</string>
+    <string name="beginButton">开始定位</string>
+    <string name="deleteButton">删除</string>
+    <string name="briefSwitch">简略</string>
+</resources>
