@@ -266,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
             setViewAndChildrenEnabled(findViewById(R.id.briefSwitch), true);
             setViewAndChildrenEnabled(findViewById(R.id.saveButton), true);
             setViewAndChildrenEnabled(findViewById(R.id.deleteButton), true);
+            setViewAndChildrenEnabled(findViewById(R.id.aliasButton), true);
             Toast.makeText(this, "停止定位", Toast.LENGTH_SHORT).show();
         }
     }
