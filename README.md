@@ -1,8 +1,7 @@
 # locationModify
 自用，root级的定位修改，基于位置复现，操作方便。需要Xposed框架支持(magisk+EdXposed)。 
 # UI
-<img src="img/default.jpg" width="40%"/>
-<img src="img/active.jpg" width="40%"/> 
+<img src="img/default.jpg" width="35%"/><img src="img/active.jpg" width="35%"/> 
 
 # TOD0
 1. 若开始定位后，在控制台强行kill进程，定位会一直进行，除非再次打开程序。
