@@ -5,7 +5,7 @@
 <img src="img/default.jpg" width="35%"/> <img src="img/active.jpg" width="35%"/>
 </div> 
 
-# TOD0
+# TODO
 1. 若开始定位后，在控制台强行kill进程，定位会一直进行，除非再次打开程序。
     - 原因是修改定位会运行在xposed进程下，主程序只负责修改配置，强行kill程序会导致没有把配置变为停止
     - 考虑后续添加服务处理这一情况，也不知道行不行
