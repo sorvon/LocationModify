@@ -1,5 +1,7 @@
 package com.dyh.LocationModify;
 
+
+import android.os.Bundle;
 import android.app.Activity;
 import android.app.AndroidAppHelper;
 import android.app.Application;
@@ -54,6 +56,7 @@ public class LocationHook implements IXposedHookLoadPackage {
 //    double longitude = 114;
     @Override
     public void handleLoadPackage(XC_LoadPackage.LoadPackageParam lpparam) throws Throwable {
+        XposedBridge.log("LocationModify Hook: "+lpparam.packageName);
         // 保证不hook自己
         if (lpparam.packageName.equals("com.dyh.LocationModify")){
             return;
@@ -65,6 +68,7 @@ public class LocationHook implements IXposedHookLoadPackage {
         if (lpparam.packageName.equals("com.miui.contentcatcher")){
             return;
         }
+        HookUtils.StackTraceHook(lpparam);
         File documentsDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS);
         File path = new File(documentsDir, "LocationModify");
         File file = new File(path, "tmpLocation.json");
@@ -87,6 +91,19 @@ public class LocationHook implements IXposedHookLoadPackage {
 }
 
 class HookUtils{
+    static void StackTraceHook(XC_LoadPackage.LoadPackageParam lpparam){
+        XposedHelpers.findAndHookMethod(StackTraceElement.class, "getClassName", new XC_MethodHook() {
+            @Override
+            protected void afterHookedMethod(MethodHookParam param) throws Throwable {
+                String className = (String) param.getResult();
+                XposedBridge.log("getClassName: "+className);
+                if (className != null && (className.contains("xposed") || className.contains("EdHooker"))) {
+                    param.setResult("android.os.Handler");
+                }
+                super.afterHookedMethod(param);
+            }
+        });
+    }
     static void GPSHook(XC_LoadPackage.LoadPackageParam lpparam, double latitude, double longitude){
         XposedHelpers.findAndHookMethod("android.location.Location", lpparam.classLoader,
                 "getLatitude", new XC_MethodHook() {

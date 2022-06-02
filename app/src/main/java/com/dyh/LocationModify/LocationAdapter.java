@@ -207,7 +207,7 @@ public class LocationAdapter extends RecyclerView.Adapter<LocationAdapter.ViewHo
         path.mkdirs();
         try {
             OutputStream outputStream = new FileOutputStream(file);
-            outputStream.write(String.valueOf("1").getBytes());
+            outputStream.write(String.valueOf(selectItem).getBytes());
             outputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
