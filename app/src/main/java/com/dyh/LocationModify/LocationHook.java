@@ -81,7 +81,13 @@ public class LocationHook implements IXposedHookLoadPackage {
             Log.e("json", new String(data));
             JSONObject jsonObject = new JSONObject(new String(data));
             if (jsonObject.getInt("active") == 1){
-                HookUtils.GPSHook(lpparam, jsonObject.getDouble("latitude"), jsonObject.getDouble("longitude"));
+                double latitude = jsonObject.getDouble("latitude") + 0.00005 * (1 - (Math.random() * 2));
+                double longitude = jsonObject.getDouble("longitude") + 0.00005 * (1 - (Math.random() * 2));
+                if (lpparam.packageName.equals("com.tencent.wework")) {
+                    latitude -= 0.002082;
+                    longitude +=0.005203;
+                }
+                HookUtils.GPSHook(lpparam, latitude, longitude);
             }
 
         } catch (IOException | JSONException e) {
